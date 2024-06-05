@@ -1,11 +1,22 @@
-import React from 'react'
+import React, { useState } from "react";
+import Whois from "./Whois";
 
 const Response = ({ value }) => {
+  const [about, setAbout] = useState(false);
+
+  const toggleAbout = () => {
+    setAbout(!about);
+  };
+
+  if (value === "whois" && !about) {
+    toggleAbout();
+  }
+
   return (
     <>
-    <div>{value}</div>
+      <Whois value={about}/>
     </>
-  )
-}
+  );
+};
 
-export default Response
+export default Response;

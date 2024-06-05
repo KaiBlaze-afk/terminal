@@ -1,20 +1,32 @@
-import { useState } from 'react'
-import Cmatrix from './components/cmatrix'
-import Terminal from './components/Terminal'
-import Header from './components/Header'
-import Response from './components/Response'
+import { useState } from 'react';
+import Terminal from './components/Terminal';
+import Header from './components/Header';
+import Response from './components/Response';
+
 function App() {
-  const [inputValue, setInputValue] = useState('');
-  const handleInputSubmit = (value) => {
-    setInputValue(value);
+  const [terminalResponses, setTerminalResponses] = useState(['']);
+
+  const handleInputSubmit = (index, value) => {
+    setTerminalResponses((prevResponses) => {
+      const newResponses = [...prevResponses];
+      newResponses[index] = value;
+      return [...newResponses, ''];
+    });
   };
+
   return (
     <>
-      <Header/>
-      <Terminal onInputSubmit={handleInputSubmit} />
-      <Response value={inputValue}/>
+      <Header />
+      {terminalResponses.map((response, index) => (
+        <div key={index}>
+          <Terminal
+            onInputSubmit={(value) => handleInputSubmit(index, value)}
+          />
+          {response && <Response value={response} />}
+        </div>
+      ))}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
