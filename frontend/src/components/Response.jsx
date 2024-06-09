@@ -1,21 +1,14 @@
 import React, { useState } from "react";
 import Whois from "./Whois";
+import Help from "./help";
 
 const Response = ({ value }) => {
-  const [about, setAbout] = useState(false);
-
-  const toggleAbout = () => {
-    setAbout(!about);
-  };
-
-  if (value === "whois" && !about) {
-    toggleAbout();
-  }
-
+  const [popup, setPopup] = useState(true);
   return (
-    <>
-      <Whois value={about}/>
-    </>
+    <div className="p-2">
+      {popup && value=="whois" && <Whois setPopup={setPopup}/>}
+      {value=="help" && <Help/>}
+    </div>
   );
 };
 

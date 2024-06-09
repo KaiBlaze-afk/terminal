@@ -1,50 +1,64 @@
 import React, { useState, useRef, useEffect } from "react";
 
-const Terminal = ({ onInputSubmit }) => {
-  const [input, setInput] = useState("");
+const Terminal = ({ onInputSubmit, clearScreen }) => {
+  const [myinput, setMyinput] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const inputRef = useRef(null);
 
-  const handleChange = (event) => {
-    setInput(event.target.value);
-  };
-
-  const handleKeyPress = (event) => {
-    if (event.key === "Enter") {
-      setSubmitted(true);
-      onInputSubmit(input);
+  useEffect(() => {
+    if (clearScreen) {
+      setMyinput("");
+      setSubmitted(false);
+      setTimeout(() => {
+        if (inputRef.current) {
+          inputRef.current.focus();
+        }
+      }, 0);
     }
-  };
+  }, [clearScreen]);
 
   useEffect(() => {
-    const handleClick = () => {
-      if (inputRef.current) {
+    const handleClickOutside = (event) => {
+      if (inputRef.current && !inputRef.current.contains(event.target)) {
         inputRef.current.focus();
       }
     };
 
-    document.addEventListener("click", handleClick);
+    document.addEventListener("click", handleClickOutside);
     return () => {
-      document.removeEventListener("click", handleClick);
+      document.removeEventListener("click", handleClickOutside);
     };
   }, []);
 
+  const handleChange = (event) => {
+    setMyinput(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setSubmitted(true);
+    onInputSubmit(myinput);
+  };
+
   return (
     <>
-      <div className="flex items-center flex-wrap leading-[1.1rem]">
+      <form
+        onSubmit={handleSubmit}
+        className="flex items-center flex-wrap leading-[1.1rem]"
+      >
         <span className="text-blue-400 flex-shrink-0">
           visitor@portfolio:~$
         </span>
         <input
-          type="text"
-          disabled={submitted}
-          onChange={handleChange}
-          onKeyDown={handleKeyPress}
           ref={inputRef}
+          type="text"
+          onChange={handleChange}
+          disabled={submitted}
+          value={myinput}
           autoFocus
           className="bg-transparent outline-none flex-grow min-w-0 ml-1 cursor-default"
         />
-      </div>
+      </form>
     </>
   );
 };

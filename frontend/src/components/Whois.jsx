@@ -1,15 +1,32 @@
-import React from "react";
+// Whois.js
+import React, { useRef, useEffect } from "react";
 import IMG from "../assets/image.png";
 
-const Whois = ({ About }) => {
+const Whois = ({ setPopup }) => {
+  const whoisRef = useRef();
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (whoisRef.current && !whoisRef.current.contains(event.target)) {
+        setPopup(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [setPopup]);
+
   return (
-    <div className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-2/3 {About?block:hidden}">
+    <div ref={whoisRef} className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-2/3 block">
       <div className="head border border-[#00ff00] text-center text-xs p-1 text-black bg-[#14c910] flex justify-between px-2">
         <div></div>
-        <div className="">About me</div><button className="close">X</button>
+        <div className="">About me</div>
+        <button onClick={() => setPopup(false)} className="close">X</button>
       </div>
-      <div className=" border border-green-400 bg-[#1a1a1a] grid grid-cols-7 space-x-4 p-6">
-        <img className=" w-[90%] m-auto col-span-2" src={IMG} alt="" />
+      <div className="border border-green-400 bg-[#1a1a1a] grid grid-cols-7 space-x-4 p-6">
+        <img className="w-[90%] m-auto col-span-2" src={IMG} alt="" />
         <div className="data border border-green-400 col-span-5 p-5">
           <div className="text-xs">
             About <span className="text-3xl">Adarsh</span>
@@ -51,6 +68,8 @@ const Whois = ({ About }) => {
               Twitter
             </a>
             <br />
+            <br />
+            Click anywhere outside to close this window.
           </div>
         </div>
       </div>
