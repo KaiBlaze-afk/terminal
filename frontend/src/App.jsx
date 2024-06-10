@@ -6,11 +6,13 @@ import Response from "./components/Response";
 function App() {
   const [terminalResponses, setTerminalResponses] = useState([""]);
   const [clearScreen, setClearScreen] = useState(false);
+  const [showHeader, setShowHeader] = useState(true)
 
   useEffect(() => {
     if (clearScreen) {
       setTerminalResponses([""]);
       setClearScreen(false);
+      setShowHeader(false)
     }
   }, [clearScreen]);
 
@@ -28,7 +30,7 @@ function App() {
 
   return (
     <>
-      <Header />
+      { showHeader && <Header />}
       {terminalResponses.map((response, index) => (
         <div key={index}>
           <Terminal
