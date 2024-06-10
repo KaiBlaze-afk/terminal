@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const Cmatrix = () => {
   const canvasRef = useRef(null);
+  const [isFullScreen, setIsFullScreen] = useState(true);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -30,6 +31,17 @@ const Cmatrix = () => {
       }
     };
 
+    const handleFullScreenChange = () => {
+      if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement && !document.msFullscreenElement) {
+        setIsFullScreen(false);
+      }
+    };
+
+    document.addEventListener('fullscreenchange', handleFullScreenChange);
+    document.addEventListener('webkitfullscreenchange', handleFullScreenChange);
+    document.addEventListener('mozfullscreenchange', handleFullScreenChange);
+    document.addEventListener('MSFullscreenChange', handleFullScreenChange);
+
     enterFullScreen();
 
     const ctx = canvas.getContext('2d');
@@ -39,7 +51,7 @@ const Cmatrix = () => {
     const latin = 'कखगघङचछजझञटठडढणतथदधनपफबभमयरलवहशषसअआइउऊॠऐऑॐऒ';
     const nums = '0123456789';
     const alphabet = katakana + latin + nums;
-    const fontSize = 16;
+    const fontSize = 12;
     const columns = canvas.width / fontSize;
     const drops = [];
     for (let x = 0; x < columns; x++) {
@@ -65,15 +77,23 @@ const Cmatrix = () => {
 
     return () => {
       clearInterval(interval);
+      document.removeEventListener('fullscreenchange', handleFullScreenChange);
+      document.removeEventListener('webkitfullscreenchange', handleFullScreenChange);
+      document.removeEventListener('mozfullscreenchange', handleFullScreenChange);
+      document.removeEventListener('MSFullscreenChange', handleFullScreenChange);
       exitFullScreen();
     };
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="block w-full h-full bg-black"
-    ></canvas>
+    <>
+      {isFullScreen && (
+        <canvas
+          ref={canvasRef}
+          className="block w-full h-full bg-black"
+        ></canvas>
+      )}
+    </>
   );
 };
 

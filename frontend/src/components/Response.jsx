@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Whois from "./Whois";
 import Help from "./help";
 import Cmatrix from "./cmatrix";
-import FullScreen from "./FullScreen";
 
 const Response = ({ value }) => {
   const [popup, setPopup] = useState(true);
