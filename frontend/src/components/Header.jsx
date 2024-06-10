@@ -2,7 +2,7 @@ import React from 'react';
 
 const Header = () => {
   return (
-    <pre className=' ' style={{ whiteSpace: 'pre' }}>
+    <pre className=' leading-[1.1rem]' style={{ whiteSpace: 'pre' }}>
       {`
   /$$$$$$        /$$                               /$$      
  /$$__  $$      | $$                              | $$      
