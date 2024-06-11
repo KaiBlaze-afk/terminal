@@ -5,6 +5,7 @@ import Cmatrix from "./cmatrix";
 import RESUME from "../assets/resume.pdf"
 import Skills from "./Skills";
 import Projects from "./Projects";
+import Contact from "./Contact";
 
 const Response = ({ value }) => {
   const [popup, setPopup] = useState(true);
