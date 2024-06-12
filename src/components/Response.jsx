@@ -6,18 +6,22 @@ import RESUME from "../assets/resume.pdf"
 import Skills from "./Skills";
 import Projects from "./Projects";
 import Contact from "./Contact";
+import Error from "./error";
 
 const Response = ({ value }) => {
   const [popup, setPopup] = useState(true);
+  const normalizedValue = value.toLowerCase();
+
   return (
     <div className="md:p-2">
-      {popup && value.toLowerCase()=="whois" && <Whois setPopup={setPopup}/>}
-      {value.toLowerCase()=="help" && <Help/>}
-      {value.toLowerCase()=="cmatrix" && <Cmatrix/>}
-      {value.toLowerCase()=="resume" && <a className="underline text-blue-500" href={RESUME} download>Download resume</a>}
-      {value.toLowerCase()=="skills" && <Skills/>}
-      {value.toLowerCase()=="projects" && <Projects/>}
-      {value.toLowerCase()=="contact" && <Contact/>}
+      {popup && normalizedValue === "whois" && <Whois setPopup={setPopup} />}
+      {normalizedValue === "help" && <Help />}
+      {normalizedValue === "cmatrix" && <Cmatrix />}
+      {normalizedValue === "resume" && <a className="underline text-blue-500" href={RESUME} download>Download resume</a>}
+      {normalizedValue === "skills" && <Skills />}
+      {normalizedValue === "projects" && <Projects />}
+      {normalizedValue === "contact" && <Contact />}
+      {normalizedValue !== "whois" && normalizedValue !== "help" && normalizedValue !== "cmatrix" && normalizedValue !== "resume" && normalizedValue !== "skills" && normalizedValue !== "projects" && normalizedValue !== "contact" && <Error />}
     </div>
   );
 };
