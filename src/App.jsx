@@ -17,7 +17,7 @@ function App() {
   }, [clearScreen]);
 
   const handleInputSubmit = (index, value) => {
-    if (value.trim() === "clear") {
+    if (value.trim().toLowerCase() === "clear") {
       setClearScreen(true);
     } else {
       setTerminalResponses((prevResponses) => {

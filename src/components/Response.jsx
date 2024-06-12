@@ -10,7 +10,7 @@ import Error from "./error";
 
 const Response = ({ value }) => {
   const [popup, setPopup] = useState(true);
-  const normalizedValue = value.toLowerCase();
+  const normalizedValue = value.toLowerCase().trim();
 
   return (
     <div className="md:p-2">
