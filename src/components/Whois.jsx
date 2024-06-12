@@ -1,4 +1,3 @@
-// Whois.js
 import React, { useRef, useEffect } from "react";
 import IMG from "../assets/image.png";
 
@@ -19,16 +18,21 @@ const Whois = ({ setPopup }) => {
   }, [setPopup]);
 
   return (
-    <div ref={whoisRef} className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-2/3 block">
-      <div className="head border border-[#00ff00] text-center text-xs p-1 text-black bg-[#14c910] flex justify-between px-2">
+    <div
+      ref={whoisRef}
+      className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-2/3 block"
+    >
+      <div className="head border border-[#00ff00] text-center text-xs p-1 text-black bg-[#14c910] flex justify-between md:px-2">
         <div></div>
         <div className="">About me</div>
-        <button onClick={() => setPopup(false)} className="close">X</button>
+        <button onClick={() => setPopup(false)} className="close">
+          X
+        </button>
       </div>
-      <div className="border border-green-400 bg-[#1a1a1a] grid grid-cols-7 space-x-4 p-6">
-        <img className="w-[90%] m-auto col-span-2" src={IMG} alt="" />
+      <div className="border border-green-400 bg-[#1a1a1a] md:grid md:grid-cols-7 md:space-x-4  md:text-[1rem] text-[.5rem] md:p-6">
+        <img className="md:w-[90%] m-auto col-span-2" src={IMG} alt="" />
         <div className="data border border-green-400 col-span-5 p-5">
-          <div className="text-xs">
+          <div className="md:text-xs text-xs h-40 md:h-[100%] md:overflow-hidden overflow-y-scroll">
             About <span className="text-3xl">Adarsh</span>
             <br />
             Hi, I'm Adarsh Kumar,

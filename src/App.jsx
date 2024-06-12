@@ -29,7 +29,7 @@ function App() {
   };
 
   return (
-    <>
+    <div className="bg-[#1A1A1A] text-[#00FF00] p-4 font-[JetBrains Mono] md:leading-[1.6rem] md:text-[1rem] text-[.8rem]">
       { showHeader && <Header />}
       {terminalResponses.map((response, index) => (
         <div key={index}>
@@ -40,7 +40,7 @@ function App() {
           {response && <Response value={response} />}
         </div>
       ))}
-    </>
+    </div>
   );
 }
 

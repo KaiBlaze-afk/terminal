@@ -41,10 +41,9 @@ const Terminal = ({ onInputSubmit, clearScreen }) => {
   };
 
   return (
-    <>
       <form
         onSubmit={handleSubmit}
-        className="flex items-center flex-wrap leading-[1.1rem]"
+        className="flex items-center flex-wrap md:leading-[1.1rem]"
       >
         <span className="text-blue-400 flex-shrink-0">
           visitor@portfolio:~$
@@ -59,7 +58,6 @@ const Terminal = ({ onInputSubmit, clearScreen }) => {
           className="bg-transparent outline-none flex-grow min-w-0 ml-1 cursor-default"
         />
       </form>
-    </>
   );
 };
 

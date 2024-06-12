@@ -5,7 +5,7 @@ const Help = () => {
     <>
       <ul>
         <li>whois - Who is Adarsh?</li>
-        <li>contact - Send a message to Adarsh.</li>
+        <li>contact - Ways to reach Adarsh.</li>
         <li>projects - Show the list of projects.</li>
         <li>skills - Show the list of skills.</li>
         <li>resume - Download the resume.</li>
