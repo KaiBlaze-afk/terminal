@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import IMG from "../assets/image.png";
+import IMG from "../assets/image.webp";
 
 const Whois = ({ setPopup }) => {
   const whoisRef = useRef();
